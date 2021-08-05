@@ -20,7 +20,9 @@
 
 @media screen and (min-width: 768px){
   .Menu {
-    height: 65px;
     position: static;
+    height: 65px;
+    bottom: auto;
+    top: 0;
   } 
 }

@@ -3,7 +3,7 @@ import React from "react"
 interface Props {
   children: React.ReactElement;
   text: string;
-  disabledText: boolean;
+  disabledText?: boolean;
 }
 
 const Icon: React.FC<Props> = (props) => {
