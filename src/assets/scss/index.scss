@@ -1,0 +1,13 @@
+// variables
+@import "./variables.scss";
+
+// global styles
+@import "./global.scss";
+
+//components
+@import "../../App.scss";
+@import "../../components/Menu/Menu.scss";
+@import "../../components/Menu/includes/MenuItem.scss";
+@import "../../components/Icon/Icon.scss";
+@import "../../components/Navigation/Navigation.scss";
+@import "../../components/Container/Container.scss";

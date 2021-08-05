@@ -1,0 +1,22 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'SF Pro';
+}
+
+a {
+  text-decoration: none;
+}
+
+p, span, a {
+  color: $text-primary;
+}
+
+@font-face {
+  font-family: 'SF Pro';
+  src: url('../fonts/sf-pro-display/SFProDisplay-Regular.woff2');
+}
