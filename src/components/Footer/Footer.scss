@@ -1,0 +1,17 @@
+.Footer {
+  height: 65px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+
+  &__text {
+    color: $text-secondary;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Footer {
+    display: flex;
+  }
+}

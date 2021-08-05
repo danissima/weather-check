@@ -1,0 +1,26 @@
+.HistoryCity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: $list-item-dark;
+  border-radius: 6px;
+
+  &__time {
+    font-size: 14px;
+    line-height: 15px;
+    margin-bottom: 6px;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  &__degrees {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+}

@@ -1,5 +1,14 @@
 .Layout {
   min-height: 100vh;
   padding-top: 65px;
+  padding-bottom: 57px;
   background-color: $background-dark;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .Layout {
+    padding-bottom: 0;
+  }
 }
