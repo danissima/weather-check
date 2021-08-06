@@ -1,3 +1,40 @@
 .Search {
   margin-top: 20px;
+
+  &__content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 510px;
+    position: relative;
+  }
+
+  &__results {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    max-height: calc(50vh - 65px);
+    overflow-y: auto;
+    border-radius: 0 0 6px 6px;
+
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Search {
+    &__results {
+      &::-webkit-scrollbar {
+        background-color: $search-result-dark;
+        border-bottom-right-radius: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $background-dark;
+        opacity: 0.7;
+        border-radius: 10px;
+      }
+    }
+  }
 }

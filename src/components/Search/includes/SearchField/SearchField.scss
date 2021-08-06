@@ -7,22 +7,17 @@
 
   &__input {
     width: 100%;
-    max-width: 516px;
     background-color: $dark-blue;
     border: none;
+    border-radius: 2px;
     height: 56px;
     color: $text-primary;
     padding: 0 20px;
     font-family: 'SF Pro';
     font-size: 16px;
-    transition: box-shadow .2s ease-out;
 
     &::placeholder {
       color: $text-secondary;
-    }
-
-    &:focus {
-      box-shadow: 0 0 1px 3px $text-secondary;
     }
   }
 }
