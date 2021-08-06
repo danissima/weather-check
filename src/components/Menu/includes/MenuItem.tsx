@@ -28,9 +28,9 @@ const MenuItem: React.FC<Props> = (props) => {
       <Link to={props.menuTo}></Link>
         <Icon
           text={props.itemTitle}
-          disabledText={currentLocation.pathname !== props.menuTo}
+          disabledText={currentLocation.pathname !== props.menuTo && props.menuTo !== currentLocation.state}
         >
-          {currentLocation.pathname === props.menuTo ? props.icon.active : props.icon.disabled}
+          {currentLocation.pathname === props.menuTo || props.menuTo === currentLocation.state ? props.icon.active : props.icon.disabled}
         </Icon>
     </div>
   )

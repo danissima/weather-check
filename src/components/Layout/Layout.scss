@@ -1,14 +1,22 @@
 .Layout {
   min-height: 100vh;
-  padding-top: 65px;
   padding-bottom: 57px;
   background-color: $background-dark;
   display: flex;
   flex-direction: column;
+
+  &_gradient {
+    background-image: $background-gradient-mobile;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .Layout {
+    padding-top: 65px;
     padding-bottom: 0;
+
+    &_gradient {
+      background-image: $background-gradient-desktop;
+    }
   }
 }

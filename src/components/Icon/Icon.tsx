@@ -2,7 +2,7 @@ import React from "react"
 
 interface Props {
   children: React.ReactElement;
-  text: string;
+  text?: string;
   disabledText?: boolean;
 }
 

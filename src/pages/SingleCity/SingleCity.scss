@@ -1,0 +1,105 @@
+.SingleCity {
+  padding: 28px 0 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    color: $text-primary;
+    margin-bottom: 14px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  &__subtitle {
+    color: $text-primary;
+    line-height: 16px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__degrees {
+    font-size: 120px;
+    font-weight: 600;
+    line-height: 133px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__image {
+    width: 206px;
+    height: 206px;
+    margin-top: -46px;
+
+    & svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__sun {
+    font-weight: 400;
+    font-size: 14px;
+    color: $text-secondary;
+    line-height: 16px;
+    margin-top: 42px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .SingleCity {
+    padding: 76px 0;
+
+    &__title {
+      font-size: 56px;
+      line-height: 62px;
+      margin-bottom: 16px;
+    }
+
+    &__subtitle {
+      line-height: 18px;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    &__info {
+      flex-direction: row;
+      margin-bottom: 26px;
+    }
+
+    &__degrees {
+      font-size: 130px;
+      line-height: 144px;
+    }
+
+    &__image {
+      width: 219px;
+      height: 219px;
+      margin-top: 0;
+      margin-left: -15px;
+    }
+
+    & .Icon {
+      &__text {
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+
+    &__sun {
+      margin-top: 32px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+}

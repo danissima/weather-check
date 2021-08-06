@@ -1,5 +1,5 @@
 import React from "react";
-import cloud from '../../assets/images/WeatherTypes/Sun-cloud-mid-rain.png';
+import cloud from '../../assets/images/WeatherTypes/Sun-cloud-mid-rain.svg';
 import DefaultCity from "./includes/DefaultCity/DefaultCity";
 
 const DefaultCities: React.FC = () => {

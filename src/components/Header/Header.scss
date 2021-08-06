@@ -1,9 +1,7 @@
 .Header {
-  position: fixed;
   width: 100%;
   top: 0;
   height: 65px;
-  background-color: $background-dark;
   z-index: 1000;
 
   &__logo {
@@ -21,6 +19,39 @@
         font-weight: 700;
         font-size: 16px;
         margin-left: 12px;
+      }
+    }
+  }
+
+  &__back {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  &_allow-return {
+    & .Header__logo {
+      display: none;
+    }
+
+    & .Header__back {
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Header {
+    position: fixed;
+
+    &_allow-return {
+      & .Header__logo {
+        display: block;
+      }
+
+      & .Header__back {
+        display: none;
       }
     }
   }
