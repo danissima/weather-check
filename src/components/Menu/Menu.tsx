@@ -20,8 +20,8 @@ const Menu: React.FC = () => {
         {menuItems.map((item, i) => {
           return (
             <MenuItem
-              menuTo={item.to}
-              itemTitle={item.title}
+              to={item.to}
+              title={item.title}
               key={i}
               icon={item.icon}
             />)

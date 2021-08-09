@@ -2,7 +2,7 @@ import './Home.scss'
 import React from "react"
 import Search from '../../components/Search/Search'
 import DefaultCities from '../../components/DefaultCities/DefaultCities'
-import { apiKey } from '../../assets/ts/apiKey'
+// import { apiKey } from '../../assets/ts/apiKey'
 
 const Home: React.FC = () => {
   // let xml = new XMLHttpRequest()

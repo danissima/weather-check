@@ -4,6 +4,7 @@ import { ReactComponent as Barometer } from '../../assets/images/barometer.svg'
 import Icon from "../../components/Icon/Icon";
 import { useParams } from "react-router-dom";
 import { apiKey } from "../../assets/ts/apiKey";
+import { getSunriseOrSunset } from "../../assets/ts/functions";
 
 interface pathParamsType {
   city: string;
@@ -17,6 +18,10 @@ interface weatherResult {
   main: {
     temp: number;
     pressure: number;
+  };
+  sys: {
+    sunrise: number;
+    sunset: number;
   }
 }
 
@@ -54,7 +59,7 @@ const SingleCity: React.FC = () => {
           <Icon text={`${weatherNow.main.pressure} мм рт. ст.`}>
             <Barometer />
           </Icon>
-          <p className="SingleCity__sun">Закат в 18:00</p>
+          <p className="SingleCity__sun">{getSunriseOrSunset(weatherNow.sys.sunrise, weatherNow.sys.sunset)}</p>
         </>
       }
     </div>

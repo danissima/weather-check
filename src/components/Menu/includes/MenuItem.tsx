@@ -11,27 +11,23 @@ export type MenuItemType = {
   to: string;
 }
 
-interface Props {
-  itemTitle: string;
-  menuTo: string;
-  icon: {
-    active: React.ReactElement;
-    disabled: React.ReactElement;
-  }
+interface locationType {
+  from: string;
 }
 
-const MenuItem: React.FC<Props> = (props) => {
-  const currentLocation = useLocation()
+const MenuItem: React.FC<MenuItemType> = (props) => {
+  const currentLocation = useLocation<locationType>()
+  const prevLocation = currentLocation.state ? currentLocation.state.from : null
 
   return (
     <div className="MenuItem">
-      <Link to={props.menuTo}></Link>
-        <Icon
-          text={props.itemTitle}
-          disabledText={currentLocation.pathname !== props.menuTo && props.menuTo !== currentLocation.state}
-        >
-          {currentLocation.pathname === props.menuTo || props.menuTo === currentLocation.state ? props.icon.active : props.icon.disabled}
-        </Icon>
+      <Link to={props.to}></Link>
+      <Icon
+        text={props.title}
+        disabledText={currentLocation.pathname !== props.to && props.to !== prevLocation}
+      >
+        {currentLocation.pathname === props.to || props.to === prevLocation ? props.icon.active : props.icon.disabled}
+      </Icon>
     </div>
   )
 }

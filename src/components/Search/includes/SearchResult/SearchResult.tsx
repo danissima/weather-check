@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 interface Props {
@@ -9,10 +9,15 @@ interface Props {
 
 const SearchResult: React.FC<Props> = (props) => {
   const unmatchedValue = props.matchedValue.replace(props.inputedValue, '')
+  const currentLocation = useLocation()
 
   return (
     <div className="SearchResult">
-      <Link to={`/single-city/${props.matchedValue}`}></Link>
+      <Link
+        to={{
+          pathname: `/single-city/${props.matchedValue}`,
+          state: { from: currentLocation.pathname }
+        }}></Link>
       <span className="SearchResult_matched">{props.inputedValue}</span>
       <span className="SearchResult_unmatched">{unmatchedValue}</span>
     </div>

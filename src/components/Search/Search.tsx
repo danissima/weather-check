@@ -17,7 +17,9 @@ const Search: React.FC = () => {
 
   const submitHandler = (e: React.BaseSyntheticEvent<React.ReactNode>) => {
     e.preventDefault()
-    if (searchResults.length) history.push(`/single-city/${searchResults[0].city}`)
+    if (searchResults.length) {
+      history.push(`/single-city/${searchResults[0].city}`, { from: history.location.pathname })
+    }
   }
 
   const inputHandler = (e: React.BaseSyntheticEvent) => {
