@@ -1,11 +1,13 @@
 import React from "react";
 
+export interface HistoryCityType {
+  name: string;
+  degrees: number;
+  time: string;
+}
+
 interface Props {
-  info: {
-    name: string;
-    degrees: string;
-    time: string;
-  }
+  info: HistoryCityType 
 }
 
 const HistoryCity: React.FC<Props> = ({ info }) => {
@@ -16,7 +18,7 @@ const HistoryCity: React.FC<Props> = ({ info }) => {
         <p className="HistoryCity__name">{info.name}</p>
       </div>
       <div className="HistoryCity__right">
-        <p className="HistoryCity__degrees">{info.degrees}</p>
+        <p className="HistoryCity__degrees">{Math.round(info.degrees)}°</p>
       </div>
     </div>
   )

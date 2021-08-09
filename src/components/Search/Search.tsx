@@ -3,6 +3,7 @@ import SearchField from "./includes/SearchField/SearchField"
 import data from '../../assets/ts/data'
 import SearchResult from "./includes/SearchResult/SearchResult"
 import { useHistory } from "react-router-dom"
+import { capitalizeFirstLetter } from "../../assets/ts/functions"
 
 interface resultsType {
   city: string;
@@ -18,12 +19,12 @@ const Search: React.FC = () => {
   const submitHandler = (e: React.BaseSyntheticEvent<React.ReactNode>) => {
     e.preventDefault()
     if (searchResults.length) {
-      history.push(`/single-city/${searchResults[0].city}`, { from: history.location.pathname })
+      history.push(`/single-city/${searchResults[0].city}`, { from: history.location.pathname, search: true })
     }
   }
 
   const inputHandler = (e: React.BaseSyntheticEvent) => {
-    let capitalized = `${e.target.value.charAt(0).toUpperCase()}${e.target.value.slice(1)}`
+    let capitalized = capitalizeFirstLetter(e.target.value) 
     setInputValue(capitalized)
   }
 

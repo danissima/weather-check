@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ReactComponent as Cloud } from '../../assets/images/WeatherTypes/Sun-cloud-mid-rain.svg'
 import { ReactComponent as Barometer } from '../../assets/images/barometer.svg'
 import Icon from "../../components/Icon/Icon";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { apiKey } from "../../assets/ts/apiKey";
-import { getSunriseOrSunset } from "../../assets/ts/functions";
+import { addHistoryCity, capitalizeFirstLetter, getSunriseOrSunset, toTime } from "../../assets/ts/functions";
+import { LocationType } from "../../components/Menu/includes/MenuItem";
 
 interface pathParamsType {
   city: string;
@@ -28,6 +29,7 @@ interface weatherResult {
 const SingleCity: React.FC = () => {
   const pathParams = useParams<pathParamsType>()
   const [weatherNow, setWeatherNow] = useState<weatherResult>()
+  const currentLocation = useLocation<LocationType>()
 
   const getWeatherNow = useCallback(() => {
     let xml = new XMLHttpRequest()
@@ -35,10 +37,13 @@ const SingleCity: React.FC = () => {
     xml.responseType = 'json'
     xml.onload = () => {
       setWeatherNow(xml.response)
+      if (currentLocation.state && currentLocation.state.search) {
+        addHistoryCity({ name: xml.response.name, degrees: xml.response.main.temp, time: toTime(Date.now()) })
+      }
       console.log(xml.response)
     }
     xml.send()
-  }, [pathParams.city])
+  }, [pathParams.city, currentLocation.state])
 
   useEffect(() => {
     getWeatherNow()
@@ -49,7 +54,7 @@ const SingleCity: React.FC = () => {
       {weatherNow &&
         <>
           <h2 className="SingleCity__title">{weatherNow.name}</h2>
-          <h3 className="SingleCity__subtitle">{weatherNow.weather[0].description}</h3>
+          <h3 className="SingleCity__subtitle">{capitalizeFirstLetter(weatherNow.weather[0].description)}</h3>
           <div className="SingleCity__info">
             <p className="SingleCity__degrees">{`${Math.round(weatherNow.main.temp)}°`}</p>
             <div className="SingleCity__image">

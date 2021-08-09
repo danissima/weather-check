@@ -16,7 +16,7 @@ const SearchResult: React.FC<Props> = (props) => {
       <Link
         to={{
           pathname: `/single-city/${props.matchedValue}`,
-          state: { from: currentLocation.pathname }
+          state: { from: currentLocation.pathname, search: true }
         }}></Link>
       <span className="SearchResult_matched">{props.inputedValue}</span>
       <span className="SearchResult_unmatched">{unmatchedValue}</span>

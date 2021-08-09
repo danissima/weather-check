@@ -11,12 +11,13 @@ export type MenuItemType = {
   to: string;
 }
 
-interface locationType {
+export interface LocationType {
   from: string;
+  search?: boolean;
 }
 
 const MenuItem: React.FC<MenuItemType> = (props) => {
-  const currentLocation = useLocation<locationType>()
+  const currentLocation = useLocation<LocationType>()
   const prevLocation = currentLocation.state ? currentLocation.state.from : null
 
   return (
