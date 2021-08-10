@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ReactComponent as Cloud } from '../../assets/images/WeatherTypes/Sun-cloud-mid-rain.svg'
 import { ReactComponent as Barometer } from '../../assets/images/barometer.svg'
 import Icon from "../../components/Icon/Icon";
 import { useLocation, useParams } from "react-router-dom";
 import { apiKey } from "../../assets/ts/apiKey";
 import { addHistoryCity, capitalizeFirstLetter, getSunriseOrSunset, toTime } from "../../assets/ts/functions";
 import { LocationType } from "../../components/Menu/includes/MenuItem";
+import { weatherTypes } from "../../assets/ts/weatherTypes";
 
 interface pathParamsType {
   city: string;
@@ -14,6 +14,7 @@ interface pathParamsType {
 interface weatherResult {
   name: string;
   weather: {
+    main: string;
     description: string;
   }[];
   main: {
@@ -56,9 +57,11 @@ const SingleCity: React.FC = () => {
           <h2 className="SingleCity__title">{weatherNow.name}</h2>
           <h3 className="SingleCity__subtitle">{capitalizeFirstLetter(weatherNow.weather[0].description)}</h3>
           <div className="SingleCity__info">
-            <p className="SingleCity__degrees">{`${Math.round(weatherNow.main.temp)}°`}</p>
+            <p className="SingleCity__degrees">{Math.round(weatherNow.main.temp)}°</p>
             <div className="SingleCity__image">
-              <Cloud />
+              {
+                weatherTypes.find(item => item.type === weatherNow.weather[0].main)?.image
+              }
             </div>
           </div>
           <Icon text={`${weatherNow.main.pressure} мм рт. ст.`}>
