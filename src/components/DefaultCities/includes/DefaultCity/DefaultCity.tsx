@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { weatherTypes } from "../../../../assets/ts/weatherTypes";
 
 export interface DefaultCityType {
   name: string;
-  degrees: string | null;
+  degrees: number | null;
   image: string | null;
 }
 
@@ -26,9 +27,11 @@ const DefaultCity: React.FC<Props> = ({ info }) => {
             className="DefaultCity__Link"
           ></Link>
           <p className="DefaultCity__name">{info.name}</p>
-          <p className="DefaultCity__degrees">{info.degrees}</p>
+          <p className="DefaultCity__degrees">{Math.round(info.degrees)}°</p>
           <div className="DefaultCity__image">
-            <img src={info.image} alt={info.degrees} />
+            {
+              weatherTypes.find(item => item.type === info.image)?.image
+            }
           </div>
         </>
       }
