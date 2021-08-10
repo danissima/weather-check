@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import PageNotFound from "../../pages/404/404"
 import About from "../../pages/About/About"
 import History from "../../pages/History/History"
 import Home from "../../pages/Home/Home"
@@ -11,6 +12,7 @@ const Navigation: React.FC = () => {
     { path: '/history', component: <History /> },
     { path: '/single-city/:city', component: <SingleCity />, theme: 'gradient', allowReturn: true },
     { path: '/', component: <Home /> },
+    { path: '/*', component: <PageNotFound /> },
   ]
 
   return (
@@ -18,7 +20,7 @@ const Navigation: React.FC = () => {
       <Switch>
         {pages.map((page, i) => {
           return (
-            <Route path={page.path} key={i}>
+            <Route exact path={page.path} key={i}>
               <Layout
                 allowReturn={page.allowReturn}
                 theme={page.theme}
