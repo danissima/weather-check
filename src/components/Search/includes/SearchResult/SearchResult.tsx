@@ -3,22 +3,28 @@ import { Link, useLocation } from "react-router-dom";
 
 
 interface Props {
-  matchedValue: string;
-  inputedValue: string;
+  disabledValue: string;
+  enabledValue: string;
+  disabled?: boolean;
 }
 
 const SearchResult: React.FC<Props> = (props) => {
-  const unmatchedValue = props.matchedValue.replace(props.inputedValue, '')
+  const unmatchedValue = props.disabledValue.replace(props.enabledValue, '')
   const currentLocation = useLocation()
 
   return (
     <div className="SearchResult">
-      <Link
-        to={{
-          pathname: `/single-city/${props.matchedValue}`,
-          state: { from: currentLocation.pathname, search: true }
-        }}></Link>
-      <span className="SearchResult_matched">{props.inputedValue}</span>
+      {
+        !props.disabled &&
+        <Link
+          to={{
+            pathname: `/single-city/${props.disabledValue}`,
+            state: { from: currentLocation.pathname, search: true }
+          }}
+        ></Link>
+      }
+
+      <span className="SearchResult_matched">{props.enabledValue}</span>
       <span className="SearchResult_unmatched">{unmatchedValue}</span>
     </div>
   )

@@ -24,7 +24,7 @@ const Search: React.FC = () => {
   }
 
   const inputHandler = (e: React.BaseSyntheticEvent) => {
-    let capitalized = capitalizeFirstLetter(e.target.value) 
+    let capitalized = capitalizeFirstLetter(e.target.value)
     setInputValue(capitalized)
   }
 
@@ -64,9 +64,12 @@ const Search: React.FC = () => {
           />
           <div className={`Search__results ${!focused ? 'Search__results_hidden' : ''}`}>
             {
-              searchResults.length ?
-                searchResults.map((result, i) => <SearchResult inputedValue={inputValue} matchedValue={result.city} key={i} />)
-                : ''
+              searchResults[0] &&
+              searchResults.map((result, i) => <SearchResult enabledValue={inputValue} disabledValue={result.city} key={i} />)
+            }
+            {
+              !searchResults[0] && inputValue.length >= 3 &&
+              <SearchResult disabledValue="Не найдено" enabledValue="" disabled />
             }
           </div>
         </div>

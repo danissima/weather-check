@@ -16,7 +16,7 @@ const DefaultCities: React.FC = () => {
   let [processedCities, setProcessedCities] = useState<DefaultCityType[]>([])
 
   const request = (city: DefaultCityType) => {
-    return new Promise<DefaultCityType>((resolve, reject) => {
+    return new Promise<DefaultCityType>((resolve) => {
       const xml = new XMLHttpRequest()
       xml.open('GET', `https://api.openweathermap.org/data/2.5/weather?lang=ru&q=${city.name}&units=metric&appid=${apiKey}`)
       xml.responseType = 'json'
