@@ -1,11 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { apiKey } from "../../assets/ts/apiKey";
+import { addDefaultCity } from "../../redux/appSlice";
+import { RootState } from "../../redux/rootReducer";
 import DefaultCity, { DefaultCityType } from "./includes/DefaultCity/DefaultCity";
 
 const DefaultCities: React.FC = () => {
+  const reduxDefaultCities = useSelector((state: RootState) => state.app.defaultCities)
+  const dispatch = useDispatch()
   const cities: DefaultCityType[] = useMemo(() => {
     return [
-      { name: 'Москва', degrees: null, image: null},
+      { name: 'Москва', degrees: null, image: null },
       { name: 'Париж', degrees: null, image: null },
       { name: 'Лондон', degrees: null, image: null },
       { name: 'Нью-Йорк', degrees: null, image: null },
@@ -13,7 +18,6 @@ const DefaultCities: React.FC = () => {
       { name: 'Токио', degrees: null, image: null },
     ]
   }, [])
-  let [processedCities, setProcessedCities] = useState<DefaultCityType[]>([])
 
   const request = (city: DefaultCityType) => {
     return new Promise<DefaultCityType>((resolve) => {
@@ -28,12 +32,15 @@ const DefaultCities: React.FC = () => {
   }
 
   const getDefaultCitiesWeather = useCallback(() => {
-    cities.forEach(city => {
-      request(city).then((changedCity) => {
-        setProcessedCities((p) => [...p, changedCity])
+    if (!reduxDefaultCities[0]) {
+      cities.forEach(city => {
+        request(city).then((changedCity) => {
+          dispatch(addDefaultCity(changedCity))
+        })
       })
-    })
-  }, [cities])
+
+    }
+  }, [cities, reduxDefaultCities, dispatch])
 
   useEffect(() => {
     getDefaultCitiesWeather()
@@ -41,7 +48,7 @@ const DefaultCities: React.FC = () => {
 
   return (
     <div className="DefaultCities">
-      {processedCities.map((city, i) => <DefaultCity info={city} key={i} />)}
+      {reduxDefaultCities.map((city, i) => <DefaultCity info={city} key={i} />)}
     </div>
   )
 }
