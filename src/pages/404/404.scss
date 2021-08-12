@@ -5,4 +5,13 @@
     text-align: center;
     color: $text-primary;
   }
+
+  & p {
+    text-align: center;
+    margin: 20px auto;
+
+    & a:hover {
+      color: $text-secondary;
+    }
+  }
 }

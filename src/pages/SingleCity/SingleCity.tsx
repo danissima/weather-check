@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ReactComponent as Barometer } from '../../assets/images/barometer.svg'
 import Icon from "../../components/Icon/Icon";
-import { useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { apiKey } from "../../assets/ts/apiKey";
 import { addHistoryCity, capitalizeFirstLetter, getSunriseOrSunset, toTime } from "../../assets/ts/functions";
 import { LocationType } from "../../components/Menu/includes/MenuItem";
@@ -12,6 +12,7 @@ interface pathParamsType {
 }
 
 interface weatherResult {
+  cod: number;
   name: string;
   weather: {
     main: string;
@@ -28,6 +29,7 @@ interface weatherResult {
 }
 
 const SingleCity: React.FC = () => {
+  const history = useHistory()
   const pathParams = useParams<pathParamsType>()
   const [weatherNow, setWeatherNow] = useState<weatherResult>()
   const currentLocation = useLocation<LocationType>()
@@ -37,14 +39,18 @@ const SingleCity: React.FC = () => {
     xml.open('GET', `https://api.openweathermap.org/data/2.5/weather?lang=ru&q=${pathParams.city}&units=metric&appid=${apiKey}`)
     xml.responseType = 'json'
     xml.onload = () => {
-      setWeatherNow(xml.response)
-      if (currentLocation.state && currentLocation.state.search) {
-        addHistoryCity({ name: xml.response.name, degrees: xml.response.main.temp, time: toTime(Date.now()) })
-      }
       console.log(xml.response)
+      if (xml.response.cod === 200) {
+        setWeatherNow(xml.response)
+        if (currentLocation.state && currentLocation.state.search) {
+          addHistoryCity({ name: xml.response.name, degrees: xml.response.main.temp, time: toTime(Date.now()) })
+        }
+      } else {
+        history.push(`/${xml.response.message.replace(/\s/g, '-')}`)
+      }
     }
     xml.send()
-  }, [pathParams.city, currentLocation.state])
+  }, [pathParams.city, currentLocation.state, history])
 
   useEffect(() => {
     getWeatherNow()
