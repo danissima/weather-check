@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { Suspense, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiKey } from "../../assets/ts/apiKey";
 import { addDefaultCity } from "../../redux/appSlice";
 import { RootState } from "../../redux/rootReducer";
-import DefaultCity, { DefaultCityType } from "./includes/DefaultCity/DefaultCity";
+import { DefaultCityType } from "./includes/DefaultCity/DefaultCity";
+const DefaultCity = React.lazy(() => import('./includes/DefaultCity/DefaultCity'))
 
 const DefaultCities: React.FC = () => {
   const reduxDefaultCities = useSelector((state: RootState) => state.app.defaultCities)
@@ -48,7 +49,13 @@ const DefaultCities: React.FC = () => {
 
   return (
     <div className="DefaultCities">
-      {reduxDefaultCities.map((city, i) => <DefaultCity info={city} key={i} />)}
+      {reduxDefaultCities.map((city, i) => {
+        return (
+          <Suspense key={`${i}2`} fallback={<p>Loading...</p>} >
+            <DefaultCity info={city} />
+          </Suspense>
+        )
+      })}
     </div>
   )
 }

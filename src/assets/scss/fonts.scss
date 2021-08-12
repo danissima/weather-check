@@ -2,22 +2,26 @@
   font-family: 'SF Pro';
   src: url('../fonts/sf-pro-display/SFProDisplay-Regular.woff2'), url('../fonts/sf-pro-display/SFProDisplay-Regular.woff'), url('../fonts/sf-pro-display/SFProDisplay-Regular.ttf');
   font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro';
   src: url('../fonts/sf-pro-display/SFProDisplay-Medium.woff2'), url('../fonts/sf-pro-display/SFProDisplay-Medium.woff'), url('../fonts/sf-pro-display/SFProDisplay-Medium.ttf');
   font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro';
   src: url('../fonts/sf-pro-display/SFProDisplay-Semibold.woff2'), url('../fonts/sf-pro-display/SFProDisplay-Semibold.woff'), url('../fonts/sf-pro-display/SFProDisplay-Semibold.ttf');
   font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro';
   src: url('../fonts/sf-pro-display/SFProDisplay-Bold.woff2'), url('../fonts/sf-pro-display/SFProDisplay-Bold.woff'), url('../fonts/sf-pro-display/SFProDisplay-Bold.ttf');
   font-weight: 700;
+  font-display: swap;
 }
