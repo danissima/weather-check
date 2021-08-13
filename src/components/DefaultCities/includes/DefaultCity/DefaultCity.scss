@@ -6,9 +6,10 @@
   background-color: $list-item-dark;
   border-radius: 6px;
   padding: 23px 0 16px 0;
-  transition: transform .3s ease-out;
+  transition: transform .3s ease-out, box-shadow .3s ease-out;
 
   &:hover {
+    box-shadow: $list-item-shadow;
     transform: translateY(-2px);
   }
 

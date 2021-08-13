@@ -1,14 +1,15 @@
-$background-dark: #161B30;
-$background-gradient-mobile: linear-gradient(180deg, #5A607C 0%, #161B30 49.93%);
-$background-gradient-desktop: radial-gradient(80.36% 80.36% at 50% 0%, #5A607C 0%, #161B30 100%);
+$background-dark: #161b30;
+$background-gradient-mobile: linear-gradient(180deg, #5a607c 0%, #161b30 49.93%);
+$background-gradient-desktop: radial-gradient(80.36% 80.36% at 50% 0%, #5a607c 0%, #161b30 100%);
 
-$list-item-dark: rgba(41, 46, 68, .5);
+$list-item-dark: rgba(41, 46, 68, 0.5);
+$list-item-shadow: 0px 5px 10px 0px rgba(240, 240, 240, 0.6);
 
-$dark-blue: #2A2F45;
+$dark-blue: #2a2f45;
 
 $text-primary: #fff;
-$text-secondary: #8A91AB;
+$text-secondary: #8a91ab;
 
-$marker-color: #494F68;
+$marker-color: #494f68;
 
-$search-result-dark: #30354B;
+$search-result-dark: #30354b;
