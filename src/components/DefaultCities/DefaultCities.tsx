@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Suspense, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiKey } from "../../assets/ts/apiKey";
@@ -22,13 +23,17 @@ const DefaultCities: React.FC = () => {
 
   const request = (city: DefaultCityType) => {
     return new Promise<DefaultCityType>((resolve) => {
-      const xml = new XMLHttpRequest()
-      xml.open('GET', `https://api.openweathermap.org/data/2.5/weather?lang=ru&q=${city.name}&units=metric&appid=${apiKey}`)
-      xml.responseType = 'json'
-      xml.onload = () => {
-        resolve({ ...city, degrees: xml.response.main.temp, image: xml.response.weather[0].main })
-      }
-      xml.send()
+      axios.get('https://api.openweathermap.org/data/2.5/weather', {
+        params: {
+          lang: 'ru',
+          q: city.name,
+          units: 'metric',
+          appid: apiKey
+        }
+      })
+        .then(response => {
+          resolve({ ...city, degrees: response.data.main.temp, image: response.data.weather[0].main })
+        })
     })
   }
 
@@ -51,7 +56,7 @@ const DefaultCities: React.FC = () => {
     <div className="DefaultCities">
       {reduxDefaultCities.map((city, i) => {
         return (
-          <Suspense key={`${i}2`} fallback={<p>Loading...</p>} >
+          <Suspense key={i} fallback={<p>Loading...</p>} >
             <DefaultCity info={city} />
           </Suspense>
         )

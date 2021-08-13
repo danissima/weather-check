@@ -6,6 +6,7 @@ import { apiKey } from "../../assets/ts/apiKey";
 import { addHistoryCity, capitalizeFirstLetter, getSunriseOrSunset, toTime } from "../../assets/ts/functions";
 import { LocationType } from "../../components/Menu/includes/MenuItem";
 import { weatherTypes } from "../../assets/ts/weatherTypes";
+import axios from "axios";
 
 interface pathParamsType {
   city: string;
@@ -35,21 +36,25 @@ const SingleCity: React.FC = () => {
   const currentLocation = useLocation<LocationType>()
 
   const getWeatherNow = useCallback(() => {
-    let xml = new XMLHttpRequest()
-    xml.open('GET', `https://api.openweathermap.org/data/2.5/weather?lang=ru&q=${pathParams.city}&units=metric&appid=${apiKey}`)
-    xml.responseType = 'json'
-    xml.onload = () => {
-      console.log(xml.response)
-      if (xml.response.cod === 200) {
-        setWeatherNow(xml.response)
-        if (currentLocation.state && currentLocation.state.search) {
-          addHistoryCity({ name: xml.response.name, degrees: xml.response.main.temp, time: toTime(Date.now()) })
-        }
-      } else {
-        history.push(`/${xml.response.message.replace(/\s/g, '-')}`)
+    axios.get('https://api.openweathermap.org/data/2.5/weather', {
+      params: {
+        lang: 'ru',
+        q: pathParams.city,
+        units: 'metric',
+        appid: apiKey
       }
-    }
-    xml.send()
+    })
+      .then(response => {
+        console.log(response.data)
+        if (response.data.cod === 200) {
+          setWeatherNow(response.data)
+          if (currentLocation.state && currentLocation.state.search) {
+            addHistoryCity({ name: response.data.name, degrees: response.data.main.temp, time: toTime(Date.now()) })
+          }
+        } else {
+          history.push(`/${response.data.message.replace(/\s/g, '-')}`)
+        }
+      })
   }, [pathParams.city, currentLocation.state, history])
 
   useEffect(() => {
