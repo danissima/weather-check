@@ -54,6 +54,20 @@
     line-height: 16px;
     margin-top: 40px;
   }
+
+  &__error {
+    text-align: center;
+
+    & h2 {
+      color: $text-primary;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    & a:hover {
+      color: $text-secondary;
+    }
+  }
 }
 
 @media screen and (min-width: 768px) {

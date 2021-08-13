@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ReactComponent as Barometer } from '../../assets/images/barometer.svg'
 import Icon from "../../components/Icon/Icon";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { apiKey } from "../../assets/ts/apiKey";
 import { addHistoryCity, capitalizeFirstLetter, getSunriseOrSunset, toTime } from "../../assets/ts/functions";
 import { LocationType } from "../../components/Menu/includes/MenuItem";
@@ -33,6 +33,7 @@ const SingleCity: React.FC = () => {
   const history = useHistory()
   const pathParams = useParams<pathParamsType>()
   const [weatherNow, setWeatherNow] = useState<weatherResult>()
+  const [isLoading, setIsLocading] = useState<boolean>(true)
   const currentLocation = useLocation<LocationType>()
 
   const getWeatherNow = useCallback(() => {
@@ -54,6 +55,11 @@ const SingleCity: React.FC = () => {
         } else {
           history.push(`/${response.data.message.replace(/\s/g, '-')}`)
         }
+      })
+      .catch(() => {
+        // history.push('/city-not-found')
+        setWeatherNow(undefined)
+        setIsLocading(false)
       })
   }, [pathParams.city, currentLocation.state, history])
 
@@ -80,6 +86,12 @@ const SingleCity: React.FC = () => {
           </Icon>
           <p className="SingleCity__sun">{getSunriseOrSunset(weatherNow.sys.sunrise, weatherNow.sys.sunset)}</p>
         </>
+      }
+      {!weatherNow && !isLoading &&
+        <div className="SingleCity__error">
+          <h2>Упс... Не можем найти город {pathParams.city}</h2>
+          <p><Link to="/">Вернуться домой</Link></p>
+        </div>
       }
     </div>
   )
