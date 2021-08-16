@@ -26,7 +26,8 @@ interface weatherResult {
   sys: {
     sunrise: number;
     sunset: number;
-  }
+  };
+  timezone: number;
 }
 
 const SingleCity: React.FC = () => {
@@ -84,7 +85,7 @@ const SingleCity: React.FC = () => {
           <Icon text={`${weatherNow.main.pressure} мм рт. ст.`}>
             <Barometer />
           </Icon>
-          <p className="SingleCity__sun">{getSunriseOrSunset(weatherNow.sys.sunrise, weatherNow.sys.sunset)}</p>
+          <p className="SingleCity__sun">{getSunriseOrSunset(weatherNow.sys.sunrise, weatherNow.sys.sunset, weatherNow.timezone)}</p>
         </>
       }
       {!weatherNow && !isLoading &&

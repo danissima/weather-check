@@ -1,8 +1,8 @@
 import { HistoryCityType } from "../../components/HistoryCities/includes/HistoryCity/HistoryCity"
 
-export const toTime = (seconds: number) => {
-  let hours = new Date(seconds).getHours()
-  let minutes = new Date(seconds).getMinutes()
+export const toTime = (milliseconds: number) => {
+  let hours = new Date(milliseconds).getHours()
+  let minutes = new Date(milliseconds).getMinutes()
 
   let processedHours = hours < 10 ? `0${hours}` : `${hours}`
   let processedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
@@ -10,10 +10,13 @@ export const toTime = (seconds: number) => {
   return `${processedHours}:${processedMinutes}`
 }
 
-export const getSunriseOrSunset = (sunrise: number, sunset: number) => {
+export const getSunriseOrSunset = (sunrise: number, sunset: number, timezome: number = 0) => {
   let millisecondsNow = Date.now()
+  let clientTimezone = new Date().getTimezoneOffset() * 60
 
-  return millisecondsNow < sunrise * 1000 ? `Рассвет в ${toTime(sunrise * 1000)}` : `Закат в ${toTime(sunset * 1000)}`
+  return millisecondsNow < sunrise * 1000 
+  ? `Рассвет в ${toTime((sunrise + timezome + clientTimezone) * 1000)}`
+  : `Закат ${millisecondsNow > sunset * 1000 ? 'был' : ''} в ${toTime((sunset + timezome + clientTimezone) * 1000)}`
 }
 
 export const capitalizeFirstLetter = (str: string) => {
