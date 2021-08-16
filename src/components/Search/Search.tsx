@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import SearchField from "./includes/SearchField/SearchField"
 import data from '../../assets/ts/data'
 import SearchResult from "./includes/SearchResult/SearchResult"
@@ -11,6 +11,7 @@ interface resultsType {
 }
 
 const Search: React.FC = () => {
+  const contentRef = useRef<HTMLDivElement>(null)
   const history = useHistory()
   const [inputValue, setInputValue] = useState('')
   const [searchResults, setSearchResults] = useState<resultsType[]>([])
@@ -40,6 +41,22 @@ const Search: React.FC = () => {
     setSearchResults(data.filter(city => city.city.match(value) && city.city.indexOf(value) === 0))
   }, [])
 
+  const closeSearchResultOnClick = (e: MouseEvent) => {
+    let searchResult = contentRef.current;
+    if (!searchResult) return
+    let target = e.target as Node & ParentNode | null;
+    while (target && target !== searchResult) {
+      target = target.parentNode;
+    }
+    if (!target) {
+      setFocused(false)
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('click', (e) => closeSearchResultOnClick(e))
+  }, [])
+
   useEffect(() => {
     searchCities(inputValue)
   }, [inputValue, searchCities])
@@ -57,7 +74,7 @@ const Search: React.FC = () => {
   return (
     <div className="Search">
       <form onSubmit={submitHandler}>
-        <div className="Search__content">
+        <div ref={contentRef} className="Search__content">
           <SearchField
             onInput={inputHandler}
             onFocus={focusHandler}

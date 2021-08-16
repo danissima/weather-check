@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,17 +8,31 @@
 }
 
 body {
-  font-family: 'SF Pro';
+  font-family: "SF Pro";
+
+  &::-webkit-scrollbar {
+    background-color: $background-dark;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $body-scroll;
+    opacity: 0.7;
+    border-radius: 10px;
+  }
 }
 
 a {
   text-decoration: none;
 }
 
-p, span, a {
+p,
+span,
+a {
   color: $text-primary;
 }
 
-ul, ol, li {
+ul,
+ol,
+li {
   list-style-type: none;
 }

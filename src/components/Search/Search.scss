@@ -15,6 +15,7 @@
     max-height: calc(50vh - 65px);
     overflow-y: auto;
     border-radius: 0 0 6px 6px;
+    z-index: 10;
 
     &_hidden {
       display: none;
